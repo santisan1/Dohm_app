@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "627631725476",
+    "firebase_url": "https://dohm-baa5d-default-rtdb.firebaseio.com",
+    "project_id": "dohm-baa5d",
+    "storage_bucket": "dohm-baa5d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627631725476:android:66a77aaf75958acaca3f31",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "627631725476-m0v54mmf6mdpggou6sk9aifb4qbo82bj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfyZ4apl9CKmCf5YLt27HpfiOTzhXjFU8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "627631725476-m0v54mmf6mdpggou6sk9aifb4qbo82bj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
