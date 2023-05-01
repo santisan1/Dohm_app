@@ -1,9 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class HeaderHomeWidget extends StatelessWidget {
-  const HeaderHomeWidget({
+  HeaderHomeWidget({
     super.key,
     required this.size,
     required this.currentName,
@@ -11,35 +10,44 @@ class HeaderHomeWidget extends StatelessWidget {
 
   final Size size;
   final String currentName;
+  final _valueCasa = TextEditingController();
+  final casa = "Casa 1";
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 10, right: 10, bottom: 30),
-      height: size.height * 0.2 - 27,
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
-        borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      margin: EdgeInsets.only(bottom: 10 * 2.5),
+      height: size.height * 0.2,
+      child: Stack(
         children: [
           Container(
-            margin: EdgeInsets.only(left: 5),
-            child: Text(
-              "Hi $currentName!",
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineSmall
-                  ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+            padding: EdgeInsets.only(left: 10, right: 10, bottom: 30),
+            height: size.height * 0.2 - 27,
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15)),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(left: 5),
+                  child: Text(
+                    "Hi $currentName!",
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                const Spacer(),
+                Container(
+                    margin: EdgeInsets.only(right: 15),
+                    child: Icon(Icons.person_2_outlined,
+                        color: Colors.grey.shade300, size: 45.0))
+              ],
             ),
           ),
-          const Spacer(),
-          Container(
-              margin: EdgeInsets.only(right: 15),
-              child: Icon(Icons.person_2_outlined,
-                  color: Colors.grey.shade300, size: 45.0)),
           Positioned(
             bottom: 0,
             left: 0,
@@ -86,7 +94,7 @@ class HeaderHomeWidget extends StatelessWidget {
                       )),
                     ),
                     IconButton(
-                        onPressed: () => _printLatestValue(),
+                        onPressed: () {},
                         icon: SvgPicture.asset('assets/Icons/rename.svg'))
                   ],
                 )),
