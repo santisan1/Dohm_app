@@ -6,12 +6,14 @@ class HeaderHomeWidget extends StatelessWidget {
     super.key,
     required this.size,
     required this.currentName,
+    required this.pressProfile,
   });
 
   final Size size;
   final String currentName;
   final _valueCasa = TextEditingController();
   final casa = "Casa 1";
+  final void Function() pressProfile;
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +45,11 @@ class HeaderHomeWidget extends StatelessWidget {
                 const Spacer(),
                 Container(
                     margin: EdgeInsets.only(right: 15),
-                    child: Icon(Icons.person_2_outlined,
-                        color: Colors.grey.shade300, size: 45.0))
+                    child: GestureDetector(
+                      onTap: pressProfile,
+                      child: Icon(Icons.person_2_outlined,
+                          color: Colors.grey.shade300, size: 45.0),
+                    ))
               ],
             ),
           ),

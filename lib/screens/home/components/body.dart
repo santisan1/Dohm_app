@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/home/components/header_filter.dart';
+import 'package:flutter_application_1/screens/profile_screen.dart';
 
 import 'header_home_page.dart';
 
@@ -41,7 +42,14 @@ class _HomeBodyState extends State<HomeBody> {
     var size = MediaQuery.of(context).size;
     return SingleChildScrollView(
         child: Column(children: [
-      HeaderHomeWidget(size: size, currentName: currentName),
+      HeaderHomeWidget(
+        size: size,
+        currentName: currentName,
+        pressProfile: () {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const ProfileScreen()));
+        },
+      ),
       TittleHeaderWithFilter(tittle: "Habitaciones", press: () {}),
       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
