@@ -56,7 +56,7 @@ class _HomeBodyState extends State<HomeBody> {
         child: Row(
           children: [
             NewHabitacionCard(
-              image: 'assets/habitacion.jpg',
+              image: 'title',
               tittle: 'Cuarto 1',
               press: () {
                 print('toco');
@@ -100,6 +100,7 @@ class NewHabitacionCard extends StatelessWidget {
       margin: EdgeInsets.only(left: 20, top: 10, bottom: 20 * 2.5),
       height: size.width * 0.5,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           GestureDetector(
             onTap: press,
@@ -123,7 +124,7 @@ class NewHabitacionCard extends StatelessWidget {
                   RichText(
                       text: TextSpan(children: [
                     TextSpan(
-                        text: "$tittle".toUpperCase(),
+                        text: '$tittle'.toUpperCase(),
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 13,
@@ -134,7 +135,7 @@ class NewHabitacionCard extends StatelessWidget {
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
