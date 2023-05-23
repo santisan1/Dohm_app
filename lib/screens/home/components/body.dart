@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/home/components/header_filter.dart';
 import 'package:flutter_application_1/screens/profile_screen.dart';
 
+import 'habitacion_details.dart';
 import 'header_home_page.dart';
 
 class HomeBody extends StatefulWidget {
-  HomeBody({super.key});
+  const HomeBody({super.key});
   @override
   State<HomeBody> createState() => _HomeBodyState();
 }
@@ -41,45 +42,53 @@ class _HomeBodyState extends State<HomeBody> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-        child: Column(children: [
-      HeaderHomeWidget(
-        size: size,
-        currentName: currentName,
-        pressProfile: () {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const ProfileScreen()));
-        },
+      child: Column(
+        children: [
+          HeaderHomeWidget(
+            size: size,
+            currentName: currentName,
+            valueCasa: "",
+            pressProfile: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+              );
+            },
+          ),
+          TittleHeaderWithFilter(tittle: "Habitaciones", press: () {}),
+          Container(
+            height: 300,
+            child: GridView(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 20,
+                crossAxisSpacing: 5,
+              ),
+              children: <Widget>[
+                NewHabitacionCard(
+                    image: 'assets/habitacion.jpg',
+                    tittle: "tittle",
+                    press: () {
+                      Navigator.of(context).push(new MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return new HabitacionDetails();
+                        },
+                      ));
+                    }),
+                NewHabitacionCard(
+                    image: 'assets/habitacion.jpg',
+                    tittle: "tittle",
+                    press: () {}),
+                NewHabitacionCard(
+                    image: 'assets/habitacion.jpg',
+                    tittle: "tittle",
+                    press: () {}),
+              ],
+            ),
+          ),
+        ],
       ),
-      TittleHeaderWithFilter(tittle: "Habitaciones", press: () {}),
-      SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: [
-            NewHabitacionCard(
-              image: 'title',
-              tittle: 'Cuarto 1',
-              press: () {
-                print('toco');
-              },
-            ),
-            NewHabitacionCard(
-              image: 'assets/cocina.jpg',
-              tittle: 'Cocina',
-              press: () {
-                print('toco');
-              },
-            ),
-            NewHabitacionCard(
-              image: 'assets/comedor.jpg',
-              tittle: 'Comedor',
-              press: () {
-                print('toco');
-              },
-            ),
-          ],
-        ),
-      )
-    ]));
+    );
   }
 }
 
@@ -97,7 +106,11 @@ class NewHabitacionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.only(left: 20, top: 10, bottom: 20 * 2.5),
+      margin: const EdgeInsets.only(
+        left: 20,
+        right: 20,
+        top: 10,
+      ),
       height: size.width * 0.5,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -106,34 +119,28 @@ class NewHabitacionCard extends StatelessWidget {
             onTap: press,
             child: Image.asset(
               image,
-              width: 170,
             ),
           ),
           GestureDetector(
             onTap: press,
             child: Container(
-              padding: EdgeInsets.all(7),
+              padding: const EdgeInsets.all(7),
               decoration: BoxDecoration(color: Colors.white, boxShadow: [
                 BoxShadow(
                     offset: Offset(0, 10),
                     blurRadius: 50,
                     color: Theme.of(context).primaryColor.withOpacity(0.23))
               ]),
-              child: Row(
-                children: [
-                  RichText(
-                      text: TextSpan(children: [
-                    TextSpan(
-                        text: '$tittle'.toUpperCase(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13,
-                            color: Theme.of(context)
-                                .primaryColor
-                                .withOpacity(0.9)))
-                  ]))
-                ],
-              ),
+              child: Row(children: [
+                Text(
+                  tittle.toUpperCase(),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                    color: Theme.of(context).primaryColor.withOpacity(0.9),
+                  ),
+                )
+              ]),
             ),
           ),
         ],

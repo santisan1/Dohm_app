@@ -36,27 +36,28 @@ class HeaderTittle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 24,
-        child: Stack(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 20 / 4),
-              child: Text(
-                text,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
+      height: 24,
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 20 / 4),
+            child: Text(
+              text,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              left: 0,
-              child: Container(
-                padding: EdgeInsets.only(left: 20 / 4),
-                height: 7,
-                color: Theme.of(context).primaryColor.withOpacity(0.2),
-              ),
-            )
-          ],
-        ));
+          ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            left: 0,
+            child: Container(
+              padding: const EdgeInsets.only(left: 20 / 4),
+              height: 7,
+              color: Theme.of(context).primaryColor.withOpacity(0.2),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

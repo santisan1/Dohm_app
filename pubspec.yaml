@@ -37,8 +37,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core:
   cloud_firestore: ^4.5.3
+  firebase_database:
   hexcolor: ^2.0.4
   flutter_svg: ^0.20.0-nullsafety.3
+  shared_preferences:
 
 
 

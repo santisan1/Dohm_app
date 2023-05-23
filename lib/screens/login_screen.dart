@@ -30,8 +30,9 @@ class _LoginScreenState extends State<LoginScreen> {
             print('Email encontrado');
             if (cursor.get("Contraseña") == password.text) {
               print('inicio de sesión exitoso');
+              // ignore: use_build_context_synchronously
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => MainScreen()));
+                  MaterialPageRoute(builder: (context) => const MainScreen()));
             } else {
               print('na');
             }
@@ -50,25 +51,26 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        child: Column(children: [
-          SizedBox(
-            height: _headerHeight,
-            child: HeaderWidget(_headerHeight, true, Icons.login),
-          ),
-          SafeArea(
-            child: Container(
-              margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-              child: Column(
-                children: [
-                  const Text(
-                    'Bienvenido',
-                    style: TextStyle(
-                        fontSize: 50,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 30.0),
-                  Form(
+        child: Column(
+          children: [
+            SizedBox(
+              height: _headerHeight,
+              child: HeaderWidget(_headerHeight, true, Icons.login),
+            ),
+            SafeArea(
+              child: Container(
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Bienvenido',
+                      style: TextStyle(
+                          fontSize: 50,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 30.0),
+                    Form(
                       key: _formkey,
                       child: Column(
                         children: [
@@ -115,34 +117,42 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.fromLTRB(10, 20, 10, 20),
+                            margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                             // child: const Text('Crear cuenta')
                             child: Text.rich(
-                              TextSpan(children: [
-                                TextSpan(text: '¿Todavía no tienes cuenta?'),
-                                TextSpan(
+                              TextSpan(
+                                children: [
+                                  const TextSpan(
+                                      text: '¿Todavía no tienes cuenta?'),
+                                  TextSpan(
                                     text: ' Creala aquí',
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
                                         Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    RegistrationPage()));
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const RegistrationPage(),
+                                          ),
+                                        );
                                       },
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: Theme.of(context).accentColor)),
-                              ]),
+                                        color: Theme.of(context).accentColor),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],
-                      ))
-                ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          )
-        ]),
+            )
+          ],
+        ),
       ),
     );
   }

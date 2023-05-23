@@ -18,14 +18,14 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
-      body: HomeBody(),
-      bottomNavigationBar: BottomNavBar(),
+      body: const HomeBody(),
+      bottomNavigationBar: const BottomNavBar(),
     );
   }
 
   AppBar appBar() {
     return AppBar(
-      backgroundColor: Color.fromARGB(255, 89, 45, 192),
+      backgroundColor: const Color.fromARGB(255, 89, 45, 192),
       elevation: 0,
       leading: IconButton(
         icon: SvgPicture.asset('assets/Icons/menu.svg'),

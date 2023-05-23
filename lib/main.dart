@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/home/components/read_habs.dart';
 import 'package:flutter_application_1/screens/splash_screen.dart';
 
 import 'firebase_options.dart';
@@ -9,14 +10,14 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final Color _primaryColor = Color.fromARGB(255, 89, 45, 192);
+  final Color _primaryColor = const Color.fromARGB(255, 89, 45, 192);
   final Color _accentColor = const Color(0xFF8A02AE);
 
-  MyApp({super.key});
+  const MyApp({super.key});
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
