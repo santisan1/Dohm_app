@@ -1,6 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/models/nombre_casa_models.dart';
 
 class UserServices {
   Future<bool> saveNombreHogar(String nombreCasa) async {

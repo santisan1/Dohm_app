@@ -41,6 +41,8 @@ dependencies:
   hexcolor: ^2.0.4
   flutter_svg: ^0.20.0-nullsafety.3
   shared_preferences:
+  image_picker:
+  firebase_storage: ^11.2.1
 
 
 

@@ -2,28 +2,28 @@
 import 'dart:convert';
 
 class NombreCasa {
-  final String nombre_casa;
+  final String nombreCasa;
   NombreCasa({
-    required this.nombre_casa,
+    required this.nombreCasa,
   });
 
   NombreCasa copyWith({
-    String? nombre_casa,
+    String? nombreCasa,
   }) {
     return NombreCasa(
-      nombre_casa: nombre_casa ?? this.nombre_casa,
+      nombreCasa: nombreCasa ?? this.nombreCasa,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'nombre_casa': nombre_casa,
+      'nombreCasa': nombreCasa,
     };
   }
 
   factory NombreCasa.fromMap(Map<String, dynamic> map) {
     return NombreCasa(
-      nombre_casa: map['nombre_casa'] as String,
+      nombreCasa: map['nombreCasa'] as String,
     );
   }
 
@@ -33,15 +33,15 @@ class NombreCasa {
       NombreCasa.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'NombreCasa(nombre_casa: $nombre_casa)';
+  String toString() => 'NombreCasa(nombreCasa: $nombreCasa)';
 
   @override
   bool operator ==(covariant NombreCasa other) {
     if (identical(this, other)) return true;
 
-    return other.nombre_casa == nombre_casa;
+    return other.nombreCasa == nombreCasa;
   }
 
   @override
-  int get hashCode => nombre_casa.hashCode;
+  int get hashCode => nombreCasa.hashCode;
 }

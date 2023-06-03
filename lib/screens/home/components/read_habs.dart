@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/models/habs_model.dart';
 
 class ReadData extends StatefulWidget {
   const ReadData({super.key});
@@ -10,93 +9,106 @@ class ReadData extends StatefulWidget {
 }
 
 class _ReadDataState extends State<ReadData> {
-  List<Widget> widgets = [];
+  final _uberStream = FirebaseFirestore.instance.collection("Habs").snapshots();
   @override
-  void initState() {
-    super.initState();
-    ReadDataFunc();
-  }
-
-  Future<void> ReadDataFunc() async {
-    await FirebaseFirestore.instance
-        .collection('Habs')
-        .orderBy('title')
-        .snapshots()
-        .listen(
-      (event) {
-        for (var snapshots in event.docs) {
-          Map<String, dynamic> map = snapshots.data();
-          print('map = $map');
-          HabsModel model = HabsModel.fromMap(map);
-          print(model.title);
-          for (var i in event.docs) {
-            widgets.add(CreateWidget(model));
-          }
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return StreamBuilder(
+      stream: _uberStream,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return const Text("Error");
         }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Text("Cargando");
+        }
+        var docs = snapshot.data!.docs;
+        return GridView.builder(
+          itemCount: docs.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2),
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              width: size.width * 0.4,
+              margin: const EdgeInsets.only(
+                bottom: 25,
+                left: 20,
+                right: 20,
+                top: 10,
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    GestureDetector(
+                      onTap: () {},
+                      child: Image.network(
+                        docs[index]["image"],
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              offset: const Offset(0, 10),
+                              blurRadius: 50,
+                              color: Theme.of(context)
+                                  .primaryColor
+                                  .withOpacity(0.43),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: docs[index]['title'].toUpperCase(),
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const TextSpan(
+                                    text: "\nCreado por: ",
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 10),
+                                  ),
+                                  TextSpan(
+                                    text: docs[index]['asigned_by'],
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 11,
+                                      color: Theme.of(context)
+                                          .primaryColor
+                                          .withOpacity(0.9),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
       },
     );
   }
-
-  Widget CreateWidget(HabsModel model) => Container(
-        margin: const EdgeInsets.only(
-          left: 20,
-          right: 20,
-          top: 10,
-        ),
-        height: 100,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            GestureDetector(
-              onTap: () {
-                print('toco');
-              },
-              child: Image.network(
-                model.image,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.all(7),
-                decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                  BoxShadow(
-                      offset: const Offset(0, 10),
-                      blurRadius: 50,
-                      color: Theme.of(context).primaryColor.withOpacity(0.23))
-                ]),
-                child: Row(children: [
-                  Text(
-                    model.title.toUpperCase(),
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
-                      color: Theme.of(context).primaryColor.withOpacity(0.9),
-                    ),
-                  )
-                ]),
-              ),
-            ),
-          ],
-        ),
-      );
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('A'),
-      ),
-      body: widgets.isEmpty
-          ? const CircularProgressIndicator()
-          : GridView.builder(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 400,
-              ),
-              itemCount: widgets.length,
-              itemBuilder: (_, index) {
-                return GridView.extent(
-                    maxCrossAxisExtent: 400, children: widgets);
-              }),
-    );
-  }
 }
+
+// ListTile(
+//                 leading: Image.network(docs[index]["image"]),
+//                 title: Text(docs[index]['title']),
+//                 subtitle: Text(docs[index]["asigned_by"]),
+//               );

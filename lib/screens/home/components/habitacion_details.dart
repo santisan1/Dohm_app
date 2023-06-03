@@ -33,37 +33,75 @@ class _HabitacionDetailsState extends State<HabitacionDetails> {
   }
 
   @override
+  Color getColor(Set<MaterialState> states) {
+    const Set<MaterialState> interactiveStates = <MaterialState>{
+      MaterialState.pressed,
+      MaterialState.hovered,
+      MaterialState.focused,
+    };
+    if (states.any(interactiveStates.contains)) {
+      return Colors.blue;
+    }
+    return Colors.red;
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("a"),
+        title: const Text("Habitación 1"),
       ),
       body: Center(
         child: Column(
           children: [
-            Checkbox(
+            CheckboxListTile(
+              title: const Text("Estado luz"),
+              secondary: const Icon(Icons.light_mode),
               value: _isactivated,
               activeColor: Colors.blue,
-              onChanged: (NewBool) {
-                setState(() {
-                  _isactivated = NewBool;
-                });
+              onChanged: (newBool) {
+                setState(
+                  () {
+                    _isactivated = newBool;
+                    if (_isactivated == true) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: Colors.green,
+                          duration: Duration(seconds: 1),
+                          content: Text("Luz prendida"),
+                        ),
+                      );
+                    }
+                    if (_isactivated == false) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: Colors.red,
+                          duration: Duration(seconds: 1),
+                          content: Text("Luz apagada"),
+                        ),
+                      );
+                    }
+                  },
+                );
                 saveNombreHogar(_isactivated, _currentSliderValue);
 
                 print(_isactivated);
               },
             ),
             Slider(
-                value: _currentSliderValue,
-                max: 100,
-                divisions: 100,
-                label: _currentSliderValue.round().toString(),
-                onChanged: (double value) {
-                  setState(() {
+              inactiveColor: Colors.grey,
+              value: _currentSliderValue,
+              max: 100,
+              divisions: 100,
+              label: _currentSliderValue.round().toString(),
+              onChanged: (double value) {
+                setState(
+                  () {
                     _currentSliderValue = value;
                     saveNombreHogar(_isactivated, _currentSliderValue);
-                  });
-                }),
+                  },
+                );
+              },
+            ),
           ],
         ),
       ),

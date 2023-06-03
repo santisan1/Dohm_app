@@ -9,12 +9,11 @@ class HeaderHomeWidget extends StatefulWidget {
     required this.size,
     required this.currentName,
     required this.pressProfile,
-    required this.valueCasa,
   });
 
   final Size size;
   final String currentName;
-  final String valueCasa;
+
   final void Function() pressProfile;
 
   @override
@@ -150,9 +149,10 @@ class _ModalRenombrarCasaState extends State<ModalRenombrarCasa> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    String? valueCasa;
+
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       height: 170,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -187,6 +187,10 @@ class _ModalRenombrarCasaState extends State<ModalRenombrarCasa> {
               children: [
                 ElevatedButton(
                   onPressed: () async {
+                    setState(() {
+                      valueCasa = _nombreCasa.text;
+                    });
+
                     SharedPreferences prefs =
                         await SharedPreferences.getInstance();
                     setState(() {
